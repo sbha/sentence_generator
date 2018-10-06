@@ -1,6 +1,6 @@
 # sentence_generator
 
-Generate a sentence from based on the sample text. Sometimes they almost make sense. 
+Generate a sentence based on a sample text. Sometimes they almost make sense. 
 
 ## Usage
 ```r
