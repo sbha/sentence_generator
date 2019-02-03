@@ -14,17 +14,9 @@ source('sen_gen_function.R')
 #top_ng <- 25
 
 
+wd_cnt <- df_ngs %>% distinct(sen_no, word_cnt) %>% summarise(mean = round(mean(word_cnt)))
 
 #sen_gen(sen_length)
-sen_gen(10)
+sen_gen(wd_cnt$mean)
 
 
-df_ngs %>% filter(bg_ender == TRUE & bg_end == 'down')
-df_ngs %>% filter(tokens == 'soninlaw')
-#df_ngs %>% filter(bg_ender == TRUE & bg_end == 'mr')
-df_ngs %>% filter(bg_end == 'mr')
-
-
-# https://stackoverflow.com/questions/13052522/how-to-leave-the-r-browser-mode-in-the-console-window
-
-# our shouts echoed the way you might calm enmity while mr
