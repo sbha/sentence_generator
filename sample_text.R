@@ -1,10 +1,7 @@
 ### Sample Text ###
 # Download sample text and convert to a data frame
 
-library(tidyverse)
-# install.packages("devtools")
-# devtools::install_github("sbha/rstrings")
-library(rstrings)
+
 
 
 # download from Project Gutenberg
