@@ -18,5 +18,7 @@ wd_cnt <- df_ngs %>% distinct(sen_no, word_cnt) %>% summarise(mean = round(mean(
 
 #sen_gen(sen_length)
 sen_gen(wd_cnt$mean)
+sen_gen(12)
 
-
+# living for better babes
+ 

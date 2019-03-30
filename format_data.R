@@ -15,7 +15,6 @@ df_ngs <-
                              if_else(sen_index == max(sen_index), 'last', 'middle'))) %>%
   mutate(bigram = lead(tokens)) %>% 
   mutate(bigram = paste(tokens, bigram)) %>% 
-  #mutate(bigram = gsub('\\s+NA$', '', bigram)) %>% 
   mutate(bigram = str_remove_all(bigram, '\\s+NA$')) %>% 
   mutate(bigram = ifelse(str_count(bigram, '\\w+') < 2, NA, bigram)) %>% 
   mutate(bg_start = str_extract(bigram, '^\\w+')) %>%
@@ -23,7 +22,6 @@ df_ngs <-
   mutate(bg_ender = !bg_end %in% bg_start) %>% 
   mutate(trigram = lead(tokens, 2)) %>% 
   mutate(trigram = paste(bigram, trigram)) %>% 
-  #mutate(trigram = gsub('\\s+NA$', '', trigram)) %>%
   mutate(trigram = str_remove_all(trigram, '\\s+NA$')) %>%
   mutate(trigram = ifelse(str_count(trigram, '\\w+') < 3, NA, trigram)) %>% 
   mutate(tg_start = str_extract(trigram, '^\\w+')) %>%

@@ -70,3 +70,6 @@ sen_gen <- function(sen_len, top_ng = 25){
   sen_out <- paste(sen_lead, sen_mid, sen_end)
   sen_out
 }
+
+
+
