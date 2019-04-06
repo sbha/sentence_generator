@@ -1,3 +1,5 @@
+# using trigrams
+
 #This is the start of something awesome! 
 sen_gen <- function(sen_len, top_ng = 25){
   mid_len <-  sen_len - 2
@@ -11,13 +13,13 @@ sen_gen <- function(sen_len, top_ng = 25){
   next_word <- function(end_word){
     df_out <-
       df_ngs %>%
-      filter(bg_start == end_word & sen_order == 'middle' & bg_ender == FALSE) %>%
-      distinct(bg_end, .keep_all = TRUE) %>%
-      arrange(desc(bg_cnt)) %>%
-      top_n(top_ng, bg_cnt) %>%
+      filter(tg_start == end_word & sen_order == 'middle' & tg_ender == FALSE) %>%
+      distinct(tg_end, .keep_all = TRUE) %>%
+      arrange(desc(tg_cnt)) %>%
+      top_n(top_ng, tg_cnt) %>%
       sample_n(1, replace = TRUE) %>%
-      distinct(bg_end)
-    new_word <- unlist(df_out$bg_end, use.names = FALSE)
+      distinct(tg_end)
+    new_word <- unlist(df_out$tg_end, use.names = FALSE)
     new_word
   }
   
@@ -43,26 +45,26 @@ sen_gen <- function(sen_len, top_ng = 25){
   ending_word <- function(end_word){
     df_out <-
       df_ngs %>%
-      #filter(bg_start == end_word & sen_order == 'last') %>%
-      #filter(bg_start == end_word & bg_end == TRUE) %>%
-      filter(bg_start == end_word & bg_ender == TRUE) %>%
-      distinct(bg_end, .keep_all = TRUE) %>%
-      arrange(desc(bg_cnt)) %>%
-      top_n(top_ng, bg_cnt)
+      #filter(tg_start == end_word & sen_order == 'last') %>%
+      #filter(tg_start == end_word & tg_end == TRUE) %>%
+      filter(tg_start == end_word & tg_ender == TRUE) %>%
+      distinct(tg_end, .keep_all = TRUE) %>%
+      arrange(desc(tg_cnt)) %>%
+      top_n(top_ng, tg_cnt)
     
     if (nrow(df_out) == 0){
       df_out <-
         df_ngs %>%
-        filter(bg_start == end_word) %>%
-        distinct(bg_end, .keep_all = TRUE) %>%
-        arrange(desc(bg_cnt)) %>%
-        top_n(top_ng, bg_cnt)
+        filter(tg_start == end_word) %>%
+        distinct(tg_end, .keep_all = TRUE) %>%
+        arrange(desc(tg_cnt)) %>%
+        top_n(top_ng, tg_cnt)
     }
     
     df_out <- df_out %>% 
       sample_n(1, replace = TRUE) %>%
-      distinct(bg_end)
-    new_word <- unlist(df_out$bg_end, use.names = FALSE)
+      distinct(tg_end)
+    new_word <- unlist(df_out$tg_end, use.names = FALSE)
     new_word
   }
   sen_end <- ending_word(mid_end)
@@ -70,6 +72,5 @@ sen_gen <- function(sen_len, top_ng = 25){
   sen_out <- paste(sen_lead, sen_mid, sen_end)
   sen_out
 }
-
 
 
