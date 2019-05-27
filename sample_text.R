@@ -8,10 +8,12 @@
 txt_url <- 'https://www.gutenberg.org/files/2814/2814-0.txt'
 txt_raw <- readr::read_file(txt_url)
 
-# remove Project Gutenberg formatting
-txt_clean <- str_remove(txt_raw, 'End of the Project Gutenberg EBook of Dubliners.+$')
-txt_clean <- str_remove(txt_raw, '^.+Produced by David Reed, Karol Pietrzak, and David Widger')
-txt_clean <- str_replace_all(txt_clean, '\r\n', ' ')
+# remove Project Gutenberg formatting at the beginning and end of the text
+txt_clean <- str_replace_all(txt_raw, '\r\n', ' ')
+txt_clean <- str_remove(txt_clean, 'End of the Project Gutenberg EBook of Dubliners.+$')
+#txt_clean <- str_remove(txt_raw, '^.+Produced by David Reed, Karol Pietrzak, and David Widger')
+txt_clean <- str_remove(txt_clean, '^.+A Mother  Grace  The Dead    THE SISTERS  ')
+#txt_clean <- str_replace_all(txt_clean, '\r\n', ' ')
 txt_clean <- str_replace_all(txt_clean, '\\s+', ' ')
 txt_clean <- str_replace_all(txt_clean, '“|”', '"')
 txt_clean <- str_replace_all(txt_clean, '’', "'")

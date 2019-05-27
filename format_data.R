@@ -1,5 +1,6 @@
 # Format the text data frame 
 # use sample text to import df_txt
+
 df_ngs <- 
   df_txt %>% 
   mutate(sen_no = row_number()) %>% 
@@ -18,8 +19,8 @@ df_ngs <-
   mutate(bigram = str_remove_all(bigram, '\\s+NA$')) %>% 
   mutate(bigram = ifelse(str_count(bigram, '\\w+') < 2, NA, bigram)) %>% 
   mutate(bg_start = str_extract(bigram, '^\\w+')) %>%
-  mutate(bg_end = str_extract(bigram, '\\w+$')) %>% 
-  mutate(bg_ender = !bg_end %in% bg_start) %>% 
+  mutate(bg_end = str_extract(bigram, '\\w+$')) %>%
+  mutate(bg_ender = !bg_end %in% bg_start) %>%
   mutate(trigram = lead(tokens, 2)) %>% 
   mutate(trigram = paste(bigram, trigram)) %>% 
   mutate(trigram = str_remove_all(trigram, '\\s+NA$')) %>%
