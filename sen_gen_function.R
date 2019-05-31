@@ -4,10 +4,10 @@
 sen_gen <- function(sen_len, top_ng = 25){
   mid_len <-  sen_len - 2
   # sentence beginning
-  # generate a randon bigram from the beginning of a sentence
+  # generate a randon bigram from the beginning of a sentence - keep as a bigram - not trigram
   sen_lead <- sample(df_ngs$bigram[df_ngs$sen_index==1], 1, replace = TRUE)
-  lead_start = gsub(' \\w+$', '', sen_lead)
-  lead_end = gsub('^\\w+ ', '', sen_lead)
+  lead_start = str_remove(sen_lead, ' \\w+$')
+  lead_end = str_remove(sen_lead, '^\\w+ ')
   # generate the middle 
   # take last word from beginning bigram and begin function
   next_word <- function(end_word){
