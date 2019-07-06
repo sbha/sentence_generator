@@ -4,10 +4,12 @@
 sen_gen <- function(sen_len, top_ng = 25){
   mid_len <-  sen_len - 2
   # sentence beginning
-  # generate a randon bigram from the beginning of a sentence - keep as a bigram - not trigram
+  # generate a randon bigram from the beginning of a sentence 
+  # keep as a bigram - not trigram
   sen_lead <- sample(df_ngs$bigram[df_ngs$sen_index==1], 1, replace = TRUE)
   lead_start = str_remove(sen_lead, ' \\w+$')
   lead_end = str_remove(sen_lead, '^\\w+ ')
+  
   # generate the middle 
   # take last word from beginning bigram and begin function
   next_word <- function(end_word){
@@ -23,6 +25,7 @@ sen_gen <- function(sen_len, top_ng = 25){
     new_word
   }
   
+  # keep generating a new middle word based on the number of middle words
   # both ways eventually get an error?
   # recur <- function(base_string, mid_len) {
   #   if (str_count(base_string, '\\w+') == mid_len) base_string #break
@@ -39,7 +42,7 @@ sen_gen <- function(sen_len, top_ng = 25){
   
   sen_mid <- recur(next_word(lead_end), mid_len)
   
-  # end word 
+  # last word in the middle section
   mid_end <- str_extract(sen_mid, '\\w+$')
   
   ending_word <- function(end_word){
