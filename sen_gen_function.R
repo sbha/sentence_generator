@@ -1,7 +1,7 @@
 # using trigrams
 
 #This is the start of something awesome! 
-sen_gen <- function(sen_len, top_ng = 25){
+generate_sentence <- function(sen_len, top_ng = 25){
   mid_len <-  sen_len - 2
   # sentence beginning
   # generate a randon bigram from the beginning of a sentence 
